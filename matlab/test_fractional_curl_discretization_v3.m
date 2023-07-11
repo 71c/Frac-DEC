@@ -184,8 +184,7 @@ for iter = 1:n_samples
     continuous_frac_curl_unintegrated = (1 ./ face_areas) .* (B2 * continuous_frac_curl_integrated_to_nodes);
     
     %% Calculate error
-    diff = discrete_frac_curl_unintegrated - continuous_frac_curl_unintegrated;
-    errors(iter) = ((face_areas' * abs(diff).^err_order) / sum(face_areas)) ^ (1/err_order);
+    errors(iter) = mean(abs(discrete_frac_curl_unintegrated - continuous_frac_curl_unintegrated).^err_order)^(1/err_order);
 
     T = toc;
     fprintf("%d,%d, %f\n", iter, nx, T);

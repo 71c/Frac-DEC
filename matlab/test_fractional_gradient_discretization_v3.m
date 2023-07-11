@@ -91,8 +91,7 @@ for iter = 1:n_samples
     continuous_frac_gradient_unintegrated = (1 ./ edge_lengths) .* continuous_frac_gradient_integrated;
     
     %% Calculate error
-    diff = discrete_frac_gradient_unintegrated - continuous_frac_gradient_unintegrated;
-    errors(iter) = ((edge_lengths' * abs(diff).^err_order) / sum(edge_lengths))^(1/err_order);
+    errors(iter) = mean(abs(discrete_frac_gradient_unintegrated - continuous_frac_gradient_unintegrated).^err_order)^(1 / err_order);
 
     T = toc;
     fprintf("%d,%d, %f\n", iter, nx, T);

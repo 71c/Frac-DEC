@@ -169,9 +169,7 @@ for iter = 1:n_samples
     continuous_frac_divergence_unintegrated = (1./ volumes) .* (B3 * continuous_frac_divergence_integrated_to_nodes);
     
     %% Calculate error
-    diff = discrete_frac_divergence_unintegrated - continuous_frac_divergence_unintegrated;
-%     errors(iter) = mean(abs(diff).^err_order)^(1/err_order);
-    errors(iter) = ((volumes' * abs(diff).^err_order) / sum(volumes))^(1/err_order);
+    errors(iter) = mean(abs(discrete_frac_divergence_unintegrated - continuous_frac_divergence_unintegrated).^err_order)^(1/err_order);
 
     T = toc;
     fprintf("%d,%d, %f\n", iter, nx, T);
